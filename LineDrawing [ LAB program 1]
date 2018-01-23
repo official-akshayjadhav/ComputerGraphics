@@ -1,0 +1,75 @@
+#include<iostream>
+#include<graphics.h>
+#include<stdlib.h>
+
+using namespace std;
+
+class pixel{
+	protected:
+		int x,y;
+		int color;
+	public:
+		pixel(){x = y = color = 0;}
+		
+		void draw(){
+			
+			putpixel(x,y,color);
+		}
+		void setXYC(int x,int y,int c){
+			this->x = x;
+			this->y =y;
+			color = c;
+		}
+};
+
+class DrawLine{
+		int x1,y1,x2,y2;
+		int color;
+		pixel p;
+	public:
+		void setLine(){
+			cout<<"\nEnter (x1 y1) & (x2 y2)  :";
+			cin>>x1>>y1>>x2>>y2;
+			cout<<"\nEnter color value (int ): ";
+			cin>>color;
+		}
+		
+		void drawDDA();
+		void drawBR();
+};
+void DrawLine::drawDDA(){
+	int dx = x2-x1;
+	int dy = y2-y1;
+	
+	int steps = (abs(dx)>abs(dy)?abs(dx):abs(dy));
+	
+	int xInc = dx / (float)steps;
+	int yInc = dy / (float)steps;
+	
+	int x = x1;
+	int y = y1;
+	
+	for(int i = 0; i<=steps; i++, x += xInc, y += yInc){
+		p.setXYC(x, y, color);
+		p.draw();
+	} 
+	
+	
+}
+
+void DrawLine::drawBR(){
+
+}
+
+int main(){
+	DrawLine d;
+	int gd = DETECT, gm = 0;
+	
+	d.setLine();
+	initgraph(&gd,&gm, NULL);
+	
+	d.drawDDA();	
+	
+ 	getchar();
+	return 0;
+}
