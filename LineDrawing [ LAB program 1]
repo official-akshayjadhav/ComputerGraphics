@@ -28,19 +28,26 @@ class DrawLine{
 		pixel p;
 	public:
 		void setLine(){
-			cout<<"\nEnter (x1 y1) & (x2 y2)  :";
+			cout<<"\nEnter the value of (x1 y1) & (x2 y2)  :";
 			cin>>x1>>y1>>x2>>y2;
-			cout<<"\nEnter color value (int ): ";
+			cout<<"\nEnter color value (int): ";
 			cin>>color;
 		}
 		
 		void drawDDA();
 		void drawBR();
 };
+/* 
+   Description : To draw line using DDA Algorithm
+   Input: None
+   Output: None
+*/
 void DrawLine::drawDDA(){
+	// Finding the displacement of x2 and x1 points respectively
 	int dx = x2-x1;
 	int dy = y2-y1;
 	
+	// Calculatin largest differrence between dy and dx
 	int steps = (abs(dx)>abs(dy)?abs(dx):abs(dy));
 	
 	int xInc = dx / (float)steps;
